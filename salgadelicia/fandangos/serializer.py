@@ -14,7 +14,12 @@ class DoacaoSerializer(serializers.ModelSerializer):
         model = Doacao
         fields = ['id', 'doador', 'volume', 'data_doacao', 'data_retirada']
 
-class UserSerializer(serializers.ModelSerializer):
+class AdminSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
         fields = "__all__"
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = get_user_model()
+        fields = ""

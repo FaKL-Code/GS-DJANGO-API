@@ -1,5 +1,5 @@
 from fandangos.models import Doador, Doacao
-from fandangos.serializer import DoadorSerializer, DoacaoSerializer, UserSerializer
+from fandangos.serializer import DoadorSerializer, DoacaoSerializer, UserSerializer, AdminSerializer
 from rest_framework import viewsets
 from rest_framework.authentication import BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -28,11 +28,9 @@ class DoacoesViewSet(viewsets.ModelViewSet):
 class UserViewSet(viewsets.ModelViewSet):
 
     permission_classes = (IsAuthenticated,)
-    serializer_class = UserSerializer
     queryset = get_user_model().objects.all()
 
-    def get(self, request, format=None):
-        content = {
-            'status': 'request was permitted'
-        }
-        return Response(content)
+    def get_serializer_class(self):
+        if self.request.user.is_superuser:
+            return AdminSerializer
+        return UserSerializer 
