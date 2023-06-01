@@ -1,3 +1,4 @@
+from datetime import date
 from django.db import models
 
 VOLUME = ((
@@ -23,7 +24,7 @@ def MinValueValidator(data):
         raise ValidationError('Data de retirada não pode ser no passado')
 
 class Doacao(models.Model):
-    doador = models.ForeignKey(Doador, on_delete=models.CASCADE)
+    doador = models.CharField(max_length=50)
     volume = models.CharField(max_length=20, choices=VOLUME, null=False, blank=False)
     data_doacao = models.DateField(auto_now_add=True)
     data_retirada = models.DateField(validators=[MinValueValidator])
