@@ -17,7 +17,6 @@ class DoadoresViewSet(viewsets.ModelViewSet):
 
 class DoacoesViewSet(viewsets.ModelViewSet):
     
-    authentication_classes = [BasicAuthentication]
     permission_classes = [IsAuthenticated]
     
     queryset = Doacao.objects.all()
